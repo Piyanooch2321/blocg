@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
         <!-- Styles -->
         <style>
@@ -62,10 +63,16 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .red{
+                background: red;
+            }
+            .green{
+                background: green;
+            }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        {{-- {{-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -80,10 +87,66 @@
             <div class="content">
                 <div class="title m-b-md">
                     hello
-                </div>
+                </div> 
 
                 
             </div>
+        </div> --}}
+        
+        
+        <div id="app" >
+            <button @click="className='red'">red</button> 
+            <button @click="className='green'">green</button>
+            
+             <h1 :class="className">Title</h1>
+             <h1 v-show="show">Title</h1><!-- v-show แสดง หรือ ซ่อน ค่า-->
+            
+            
+             <input type="text" v-model="message" @keydown.enter="addName"> <!-- v-model by ข้อมูล -->
+                <button @click="addName">add</button>
+            <h1 id="h1"> @{{ message }} </h1>
+
+                <ul>
+                <li v-for="name in names">@{{ name }}</li><!-- v-for ลูป-->
+                </ul>
+
+                <h1> commputed </h1>
+                <ul>
+                    <li v-for="number in lessThan6Number">@{{ number }}</li>
+                </ul>
+
         </div>
+
     </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                    className : 'red',
+                    message: 'Hello Vue!',
+                    show : true,
+                    names: ['pop','por','tor'],
+                    numbers: [1,2,3,4,5,6,7,8,9,10]
+                },
+
+            methods: {
+                    addName() {
+                        this.names.push(this.message);
+                        this.message = '';
+                       
+                    }
+                },
+                
+            computed: {
+                lessThan6Number() {
+                    return this.numbers.filter((number)=>{
+                        return number % 2==0;
+                    });
+                }
+
+            }    
+           });
+    </script>   
 </html>
+
+ 
