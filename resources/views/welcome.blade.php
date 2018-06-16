@@ -94,8 +94,8 @@
         </div> --}}
         
         
-        <div id="app" >
-            <button @click="className='red'">red</button> 
+        
+            {{-- <button @click="className='red'">red</button> 
             <button @click="className='green'">green</button>
             
              <h1 :class="className">Title</h1>
@@ -113,39 +113,28 @@
                 <h1> commputed </h1>
                 <ul>
                     <li v-for="number in lessThan6Number">@{{ number }}</li>
-                </ul>
-
+                </ul> --}}
+                {{-- เมื่อคลิกข้อความจะกลับด้าน --}}
+      
+        <div id="app1">
+            <p>@{{ foo }}</p>
+            <!-- this will no longer update `foo`! -->
+            <button @click="foo='baz'">Change it</button>
         </div>
 
     </body>
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                    className : 'red',
-                    message: 'Hello Vue!',
-                    show : true,
-                    names: ['pop','por','tor'],
-                    numbers: [1,2,3,4,5,6,7,8,9,10]
-                },
+           
 
-            methods: {
-                    addName() {
-                        this.names.push(this.message);
-                        this.message = '';
-                       
-                    }
-                },
-                
-            computed: {
-                lessThan6Number() {
-                    return this.numbers.filter((number)=>{
-                        return number % 2==0;
-                    });
-                }
+        var obj = {
+                foo: 'bar',
+            }
+            Object.freeze(obj)
+        new Vue({
+            el: '#app1',
+            data: obj
+            });
 
-            }    
-           });
     </script>   
 </html>
 
